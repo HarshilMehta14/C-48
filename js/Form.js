@@ -1,9 +1,10 @@
 class Form{
     constructor(){
-        this.input = createInput("Name");
+        this.input = createInput("").attribute("placeholder", "Name");
         this.title = createElement('h2');
         this.button = createButton("Next");
         this.greeting = createElement('h3');
+        this.reset = createButton("Reset");
     }
 
     hide_Elements(){
@@ -14,6 +15,7 @@ class Form{
     }
     display(){
         
+        background(bg);
         this.title.html("Drag Racing"); 
         this.title.position(displayWidth/2-50,0);
         
@@ -21,6 +23,7 @@ class Form{
 
         this.button.position(displayWidth/2+30,displayHeight/2);
         
+        this.reset.position(displayWidth-120, 30);
         
         this.button.mousePressed(()=>{
             this.input.hide();
@@ -40,5 +43,15 @@ class Form{
             this.greeting.html("Hello "+player.name);
             this.greeting.position(displayWidth/2-70,displayHeight/4);
         })
-    }
+
+        this.reset.mousePressed(()=>
+        {
+            player.updatecount(0);
+            game.update(0);
+            database.ref('/').update({
+                Players:null
+            });
+
+        })
+        }
 }
