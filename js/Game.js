@@ -46,7 +46,9 @@ class Game{
         form.hide_Elements();
         
         Player.getPlayerInfo();
-        
+        player.getcarsatEnd();
+        player.rank = finishedPlayers;
+
         if(allPlayers !== undefined){
             //var displayPosition = 130;
             image(track, 0, -displayHeight*4, displayWidth, displayHeight*5);
@@ -84,11 +86,28 @@ class Game{
         }
         if(player.distance > 3900){
             myGameState = 2;
+            player.rank += 1;
+            Player.updateCars_AtEnd(player.rank);            
         }
 
         drawSprites();
     }
     end(){
-        console.log("You Win");
+        background(230);
+        imageMode(CENTER);
+        textSize(40);
+        stroke(0, 255, 0);
+
+        if(player.rank === 1)
+        image(goldImg, displayWidth/2, -displayHeight*4, 100, 100);
+
+        if(player.rank === 2)
+        image(silverImg, displayWidth/2, -displayHeight*4, 100, 100);
+
+        if(player.rank === 3)
+        image(bronzeImg, displayWidth/2, -displayHeight*4, 100, 100);
+
+        if(player.rank === 4)
+        text("You Lose", displayWidth/2, -displayHeight*4);
     }
 }

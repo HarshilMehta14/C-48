@@ -49,7 +49,8 @@ class Form{
             player.updatecount(0);
             game.update(0);
             database.ref('/').update({
-                Players:null
+                Players:null,
+                CarsAtEnd : 0
             });
 
         })
