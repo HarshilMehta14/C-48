@@ -1,57 +1,59 @@
-var myGameState = 0;
-var myPlayerCount = 0;
-var form,player,game;
-var database, position;
-var allPlayers;
-var car1, car2, car3, car4, cars;
-var track, bg, ground, car1Img, car2Img, car3Img, car4Img;
-var goldImg, silverImg, bronzeImg;
-var finishedPlayers;
+//Universal variables
+var GameState = 0;
+var bg;
+
+//Level 1 variables
+var EnemySpaceship1, EnemySpaceship1Img;
+var Player, PlayerImg;
+var bullets, bulletsImg;
+var Missiles, MissilesImg;
+var EnemySpaceship1Grp, MissilesGrp, BulletsGrp;
+
 
 function preload(){
-    track = loadImage("images/track.jpg");
-    bg = loadImage("images/track.png");
-    ground = loadImage("images/ground.png");
-
-    car1Img = loadImage("images/car1.png");
-    car2Img = loadImage("images/car2.png");
-    car3Img = loadImage("images/car3.png");
-    car4Img = loadImage("images/car4.png");
-
-    goldImg = loadImage("images/gold.png");
-    silverImg = loadImage("images/silver.png");
-    bronzeImg = loadImage("images/bronze.png");
+    
 }
 function setup(){
     createCanvas(displayWidth-40, displayHeight-30);
 
-    database = firebase.database();
-   
-    game = new Game();
-    game.getState();
-    game.start();
+    //The player Sprite and spaceship we'll add Image afterwards
+    player = createSprite(width/2, height-50, 70, 70);
+    player.shapeColor = "red";
 
+    //Creating Groups For level1 variables
+    EnemySpaceship1Grp = new Group();
+    MissilesGrp = new Group();
+    BulletsGrp = new Group();
+
+    
 }
 
 function draw(){
-    background(bg);
-    
-    if(myPlayerCount === 4){
-        game.update(1);
+    background(0);
+
+    if(frameCount % 100 === 0){
+        SpawnSpaceships1();
     }
-    
-    if(myGameState === 1){
-        clear ();
-        game.play();
+    EnemySpaceship1Grp.setVelocityYEach = 2;
+    EnemySpaceship1Grp.setLifetimeEach = 350;
+
+    drawSprites();
+}
+
+function SpawnSpaceships1()
+{
+    var b = 50;
+    for(var a = 0; a <= 7; a++)
+    {
+        console.log("hi");
+        
+        EnemySpaceship1 = createSprite(b, 50, 50, 50);
+        b += 100;
+        EnemySpaceship1.shapeColor = "blue";
+        //EnemySpaceship1.scale
+        EnemySpaceship1Grp.add(EnemySpaceship1);
         
     }
-
-    /*if(myGameState === 2 && finishedPlayers > 0)
-    {
-        image(track, 0, -displayHeight*4, displayWidth, displayHeight*5);
-        drawSprites();
-    }*/
-    if(myGameState === 2){//&& finishedPlayers === 4){
-        game.end();
-    }
+    //EnemySpaceship1Grp.setVelocityYEach = 2;
+    //EnemySpaceship1Grp.setLifetimeEach = 350;
 }
