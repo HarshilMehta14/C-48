@@ -62,7 +62,6 @@ function setup(){
     player = createSprite(width/2, height-70, 150, 150);
     player.addImage(PlayerImg);
     player.scale = 0.4;
-    //player.debug = true;
     player.setCollider("circle", 0, 0, 150)
 
     button = createButton("Play");
@@ -267,7 +266,6 @@ function SpawnSpaceships1()
         EnemySpaceship1.addImage(EnemySpaceship1Img);
         EnemySpaceship1.scale = s;
 
-        EnemySpaceship1.debug = true;
         EnemySpaceship1Grp.add(EnemySpaceship1);
         
     }
